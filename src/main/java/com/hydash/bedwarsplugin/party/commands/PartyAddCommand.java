@@ -58,3 +58,5 @@ public class PartyAddCommand extends CommandBase {
     }
 
 }
+
+// I shouldn't be able to commit this change to main!!
