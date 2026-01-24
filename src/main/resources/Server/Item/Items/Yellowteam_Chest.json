@@ -1,0 +1,56 @@
+{
+  "TranslationProperties": {
+    "Name": "Leather Armor"
+  },
+  "Parent": "Armor_Iron_Chest",
+  "Icon": "Icons/ItemsGenerated/Yellowteam_Chest.png",
+  "IconProperties": {
+    "Scale": 0.42,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      1,
+      -50
+    ]
+  },
+  "Model": "Items/Armor/Tunic_Long_Sleeves.blockymodel",
+  "Texture": "Items/Armor/Yellow.png",
+  "Armor": {
+    "ArmorSlot": "Chest",
+    "BaseDamageResistance": 0,
+    "CosmeticsToHide": [
+      "Overtop"
+    ],
+    "DamageResistance": {
+      "Physical": [
+        {
+          "Amount": 0.09,
+          "CalculationType": "Multiplicative"
+        }
+      ],
+      "Projectile": [
+        {
+          "Amount": 0.09,
+          "CalculationType": "Multiplicative"
+        }
+      ]
+    },
+    "StatModifiers": {
+      "Health": [
+        {
+          "Amount": 17,
+          "CalculationType": "Additive"
+        }
+      ]
+    }
+  },
+  "Tags": {
+    "Type": [
+      "Armor"
+    ]
+  },
+  "Quality": "Common"
+}

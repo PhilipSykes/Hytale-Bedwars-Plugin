@@ -1,0 +1,122 @@
+{
+  "TranslationProperties": {
+    "Name": "Yellow Bed",
+    "Description": "server.items.Furniture_Crude_Bed.description"
+  },
+  "Icon": "Icons/ItemsGenerated/Bedwars_Bed_Yellow.png",
+  "Categories": [
+    "Furniture.Benches"
+  ],
+  "Recipe": {
+    "TimeSeconds": 1,
+    "Input": [
+      {
+        "ItemId": "Ingredient_Fibre",
+        "Quantity": 3
+      },
+      {
+        "ItemId": "Ingredient_Hide_Light",
+        "Quantity": 2
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Id": "Fieldcraft",
+        "Type": "Crafting",
+        "Categories": [
+          "Tools"
+        ]
+      },
+      {
+        "Id": "Workbench",
+        "Type": "Crafting",
+        "Categories": [
+          "Workbench_Survival"
+        ]
+      }
+    ]
+  },
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Model",
+    "Opacity": "Transparent",
+    "CustomModel": "Items/Bedwars_Bed.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Items/Bedwars_Bed_Yellow.png",
+        "Weight": 1
+      }
+    ],
+    "HitboxType": "Bedwars_Bed",
+    "VariantRotation": "NESW",
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "BedwarsBreak",
+        "Quantity": 0
+      },
+      "Tools": [
+        {}
+      ]
+    },
+    "Beds": [
+      {
+        "Offset": {
+          "X": -0.1,
+          "Y": -0.4,
+          "Z": 0.8
+        },
+        "Yaw": 0
+      }
+    ],
+    "Interactions": {
+      "Primary": "Check_Can_Break_Respawn"
+    },
+    "BlockParticleSetId": "Wood",
+    "Support": {
+      "Down": [
+        {
+          "FaceType": "Full"
+        }
+      ]
+    },
+    "ParticleColor": "#ffcc0f",
+    "BlockSoundSetId": "Cloth",
+    "BlockEntity": {
+      "Components": {
+        "RespawnBlock": {}
+      }
+    }
+  },
+  "PlayerAnimationsId": "Block",
+  "IconProperties": {
+    "Scale": 0.4,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      -10,
+      -11
+    ]
+  },
+  "ResourceTypes": [
+    {
+      "Id": "Fuel"
+    },
+    {
+      "Id": "Charcoal"
+    }
+  ],
+  "Tags": {
+    "Type": [
+      "Furniture"
+    ],
+    "Family": [
+      "Crude"
+    ]
+  },
+  "Scale": 0.6,
+  "ItemSoundSetId": "ISS_Items_Cloth",
+  "MaxStack": 1
+}
