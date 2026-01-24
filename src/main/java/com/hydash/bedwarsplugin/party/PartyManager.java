@@ -23,7 +23,6 @@ public class PartyManager {
         return party;
     }
 
-
     public Party getParty(UUID player) {
         return partyByPlayer.get(player);
     }
@@ -42,6 +41,10 @@ public class PartyManager {
     public void disbandParty(Party party) {
         partyByPlayer.entrySet()
                 .removeIf(e -> e.getValue() == party);
+    }
+
+    public void promotePlayer(Party party, UUID leader, UUID player) {
+        party.promotePlayer(leader, player);
     }
 
     private void ensureNotInParty(UUID player) {

@@ -48,11 +48,17 @@ public class Party {
         this.leader = player;
     }
 
-    public boolean isLeader(UUID player) {
-        return player.equals(leader);
+    public boolean isNotLeader(UUID player) {
+        return !player.equals(leader);
     }
 
     public int getPartySize() {
         return members.size()+1;
+    }
+
+    public Set<UUID> getPlayers() {
+        Set<UUID> players = new HashSet<>(members);
+        players.add(leader);
+        return players;
     }
 }
