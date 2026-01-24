@@ -10,5 +10,6 @@ public class PartyCommand extends AbstractCommandCollection {
         this.addSubCommand(new PartyDisbandCommand());
         this.addSubCommand(new PartyLeaveCommand());
         this.addSubCommand(new PartyPromoteCommand());
+        this.addSubCommand(new PartyListCommand());
     }
 }
