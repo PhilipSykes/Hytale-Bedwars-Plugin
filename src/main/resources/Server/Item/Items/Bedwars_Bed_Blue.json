@@ -40,10 +40,10 @@
     "Material": "Solid",
     "DrawType": "Model",
     "Opacity": "Transparent",
-    "CustomModel": "Items/Bedwars_Bed.blockymodel",
+    "CustomModel": "Items/Furniture/Bedwars_Bed.blockymodel",
     "CustomModelTexture": [
       {
-        "Texture": "Items/Bedwars_Bed_Blue.png",
+        "Texture": "Items/Furniture/Bedwars_Bed_Blue.png",
         "Weight": 1
       }
     ],
