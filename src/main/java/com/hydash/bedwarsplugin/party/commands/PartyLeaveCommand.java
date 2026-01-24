@@ -38,7 +38,7 @@ public class PartyLeaveCommand extends AbstractPlayerCommand {
                 partyManager.removePlayer(party, senderUuid);
                 playerRef.sendMessage(Message.raw("You have left the party."));
 
-                //TODO: Broadcast to party members that player has left the party
+                party.BroadcastToParty(String.format("%s has left the party.", playerRef.getUsername()));
             }
         } catch (IllegalArgumentException e) {
             playerRef.sendMessage(

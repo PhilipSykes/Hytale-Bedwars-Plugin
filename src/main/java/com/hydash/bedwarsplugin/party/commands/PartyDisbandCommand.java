@@ -39,8 +39,8 @@ public class PartyDisbandCommand extends AbstractPlayerCommand {
                             "You are not the leader of this party!"
                     );
                 } else {
+                    party.BroadcastToParty("The party has been disbanded!");
                     partyManager.disbandParty(party);
-                    // TODO: Broadcast Disbanding to all party members
                 }
             }
         } catch (IllegalArgumentException e) {

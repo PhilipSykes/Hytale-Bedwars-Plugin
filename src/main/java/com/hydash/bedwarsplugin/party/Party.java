@@ -1,5 +1,10 @@
 package com.hydash.bedwarsplugin.party;
 
+import com.hypixel.hytale.server.core.Message;
+import com.hypixel.hytale.server.core.entity.entities.Player;
+import com.hypixel.hytale.server.core.universe.PlayerRef;
+import com.hypixel.hytale.server.core.universe.Universe;
+
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -11,6 +16,15 @@ public class Party {
     public Party(UUID partyLeader, UUID partyMember ) {
         this.leader = partyLeader;
         this.members.add(partyMember);
+
+        // This also sucks but oh well
+        Universe universe = Universe.get();
+        PlayerRef leaderRef = universe.getPlayer(leader);
+        PlayerRef memberRef = universe.getPlayer(members.iterator().next());
+
+        assert leaderRef != null;
+        assert memberRef != null;
+        leaderRef.sendMessage(Message.raw(String.format("You have created a party with %s!", memberRef.getUsername())));
     }
 
     public void addPlayer(UUID player) {
@@ -61,4 +75,18 @@ public class Party {
         players.add(leader);
         return players;
     }
+
+    public void BroadcastToParty (String message) {
+        Universe universe = Universe.get();
+        Set<UUID> memberUuids = new HashSet<>(getPlayers());
+
+        //This kind of sucks but oh well
+        for (UUID uuid : memberUuids) {
+            PlayerRef player = universe.getPlayer(uuid);
+            assert player != null;
+            player.sendMessage(Message.raw(message));
+        }
+    }
 }
+
+//TODO: party needs to listen for disconnecting players and then remove them after 5 mins. Also needs to listen for players connecting

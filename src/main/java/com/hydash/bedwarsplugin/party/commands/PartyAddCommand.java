@@ -48,14 +48,9 @@ public class PartyAddCommand extends AbstractPlayerCommand {
                             "You must be the party leader to add players!"
                     );
                 }
+                party.BroadcastToParty(String.format("Added %s to the party!", targetPlayerRef.getUsername()));
                 partyManager.addPlayer(party, targetUuid);
             }
-
-            // TODO: Change this to broadcast to all party members
-            String senderMessage = String.format("Added %s to party successfully.", targetPlayerRef.getUsername());
-            playerRef.sendMessage(
-                    Message.raw(senderMessage)
-            );
 
             String targetMessage = String.format("You have joined %s's party.", playerRef.getUsername());
             targetPlayerRef.sendMessage(Message.raw(targetMessage));
