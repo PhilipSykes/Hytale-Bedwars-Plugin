@@ -14,6 +14,7 @@ import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import org.jetbrains.annotations.NotNull;
 
+import java.awt.*;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -26,7 +27,13 @@ public class PartyListCommand extends AbstractPlayerCommand {
     }
 
     @Override
-    protected void execute(@NotNull CommandContext commandContext, @NotNull Store<EntityStore> store, @NotNull Ref<EntityStore> ref, @NotNull PlayerRef playerRef, @NotNull World world) {
+    protected void execute(
+            @NotNull CommandContext commandContext,
+            @NotNull Store<EntityStore> store,
+            @NotNull Ref<EntityStore> ref,
+            @NotNull PlayerRef playerRef,
+            @NotNull World world
+    ) {
         try {
             PartyManager partyManager = ExamplePlugin.PARTY_MANAGER;
             Party party = partyManager.getParty(playerRef.getUuid());
@@ -43,11 +50,11 @@ public class PartyListCommand extends AbstractPlayerCommand {
                     .collect(Collectors.joining(", "));
 
             String message = String.format("You are in a party with: %s.", players);
-            playerRef.sendMessage(Message.raw(message));
+            playerRef.sendMessage(Message.raw(message).color(Color.ORANGE));
 
         } catch (IllegalArgumentException e) {
             playerRef.sendMessage(
-                    Message.raw(e.getMessage())
+                    Message.raw(e.getMessage()).color(Color.RED)
             );
         }
     }

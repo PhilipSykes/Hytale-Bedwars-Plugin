@@ -15,6 +15,7 @@ import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import org.jetbrains.annotations.NotNull;
 
+import java.awt.*;
 import java.util.UUID;
 
 public class PartyPromoteCommand extends AbstractPlayerCommand {
@@ -26,7 +27,13 @@ public class PartyPromoteCommand extends AbstractPlayerCommand {
     }
 
     @Override
-    protected void execute(@NotNull CommandContext commandContext, @NotNull Store<EntityStore> store, @NotNull Ref<EntityStore> ref, @NotNull PlayerRef playerRef, @NotNull World world) {
+    protected void execute(
+            @NotNull CommandContext commandContext,
+            @NotNull Store<EntityStore> store,
+            @NotNull Ref<EntityStore> ref,
+            @NotNull PlayerRef playerRef,
+            @NotNull World world
+    ) {
         UUID senderUuid = playerRef.getUuid();
 
         PlayerRef targetPlayerRef = commandContext.get(this.targetPlayerRef);
@@ -48,13 +55,13 @@ public class PartyPromoteCommand extends AbstractPlayerCommand {
                     );
                 } else {
                     partyManager.promotePlayer(party, senderUuid, targetUuid);
-                    playerRef.sendMessage(Message.raw(String.format("Successfully promoted %s to party leader!", targetPlayerRef.getUsername())));
-                    targetPlayerRef.sendMessage(Message.raw("You are now promoted to party leader!"));
+                    playerRef.sendMessage(Message.raw(String.format("Successfully promoted %s to party leader!", targetPlayerRef.getUsername())).color(Color.ORANGE));
+                    targetPlayerRef.sendMessage(Message.raw("You are now promoted to party leader!").color(Color.ORANGE));
                 }
             }
         } catch (IllegalArgumentException e) {
             playerRef.sendMessage(
-                    Message.raw(e.getMessage())
+                    Message.raw(e.getMessage()).color(Color.RED)
             );
         }
     }

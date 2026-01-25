@@ -13,6 +13,7 @@ import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import org.jetbrains.annotations.NotNull;
 
+import java.awt.*;
 import java.util.UUID;
 
 public class PartyLeaveCommand extends AbstractPlayerCommand {
@@ -22,7 +23,13 @@ public class PartyLeaveCommand extends AbstractPlayerCommand {
     }
 
     @Override
-    protected void execute(@NotNull CommandContext commandContext, @NotNull Store<EntityStore> store, @NotNull Ref<EntityStore> ref, @NotNull PlayerRef playerRef, @NotNull World world) {
+    protected void execute(
+            @NotNull CommandContext commandContext,
+            @NotNull Store<EntityStore> store,
+            @NotNull Ref<EntityStore> ref,
+            @NotNull PlayerRef playerRef,
+            @NotNull World world
+    ) {
         UUID senderUuid = playerRef.getUuid();
 
         try {
@@ -36,13 +43,13 @@ public class PartyLeaveCommand extends AbstractPlayerCommand {
                 );
             } else {
                 partyManager.removePlayer(party, senderUuid);
-                playerRef.sendMessage(Message.raw("You have left the party."));
+                playerRef.sendMessage(Message.raw("You have left the party.").color(Color.ORANGE));
 
-                party.BroadcastToParty(String.format("%s has left the party.", playerRef.getUsername()));
+                party.broadcast(String.format("%s has left the party.", playerRef.getUsername()));
             }
         } catch (IllegalArgumentException e) {
             playerRef.sendMessage(
-                    Message.raw(e.getMessage())
+                    Message.raw(e.getMessage()).color(Color.RED)
             );
         }
     }

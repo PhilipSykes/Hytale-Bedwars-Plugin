@@ -10,55 +10,72 @@ import com.hypixel.hytale.server.core.command.system.CommandContext;
 import com.hypixel.hytale.server.core.command.system.arguments.system.RequiredArg;
 import com.hypixel.hytale.server.core.command.system.arguments.types.ArgTypes;
 import com.hypixel.hytale.server.core.command.system.basecommands.AbstractPlayerCommand;
-
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import org.jetbrains.annotations.NotNull;
 
+import java.awt.*;
 import java.util.UUID;
 
 public class PartyAddCommand extends AbstractPlayerCommand {
+
     private final RequiredArg<PlayerRef> targetPlayerRef;
 
     public PartyAddCommand() {
-        super("add", "Add a player to your party.");
-
-        this.targetPlayerRef = this.withRequiredArg("Player", "Player to add to party", ArgTypes.PLAYER_REF);
+        super("add", "Invite a player to your party.");
+        this.targetPlayerRef = this.withRequiredArg(
+                "Player",
+                "Player to invite",
+                ArgTypes.PLAYER_REF
+        );
     }
 
     @Override
-    protected void execute(@NotNull CommandContext commandContext, @NotNull Store<EntityStore> store, @NotNull Ref<EntityStore> ref, @NotNull PlayerRef playerRef, @NotNull World world) {
+    protected void execute(
+            @NotNull CommandContext commandContext,
+            @NotNull Store<EntityStore> store,
+            @NotNull Ref<EntityStore> ref,
+            @NotNull PlayerRef playerRef,
+            @NotNull World world
+    ) {
         PlayerRef targetPlayerRef = commandContext.get(this.targetPlayerRef);
-        UUID targetUuid = targetPlayerRef.getUuid();
-
         UUID senderUuid = playerRef.getUuid();
+        UUID targetUuid = targetPlayerRef.getUuid();
 
         try {
             PartyManager partyManager = ExamplePlugin.PARTY_MANAGER;
 
             Party party = partyManager.getParty(senderUuid);
 
-            //TODO: add confirmation for invited player
             if (party == null) {
-                partyManager.createParty(senderUuid, targetUuid);
-            } else {
-                if (party.isNotLeader(senderUuid)) {
-                    throw new IllegalArgumentException(
-                            "You must be the party leader to add players!"
-                    );
-                }
-                party.BroadcastToParty(String.format("Added %s to the party!", targetPlayerRef.getUsername()));
-                partyManager.addPlayer(party, targetUuid);
+                party = partyManager.createParty(senderUuid);
             }
 
-            String targetMessage = String.format("You have joined %s's party.", playerRef.getUsername());
-            targetPlayerRef.sendMessage(Message.raw(targetMessage));
+            if (party.isNotLeader(senderUuid)) {
+                throw new IllegalArgumentException(
+                        "You must be the party leader to invite players!"
+                );
+            }
+
+            partyManager.invitePlayer(party, targetUuid);
+
+            playerRef.sendMessage(
+                    Message.raw(String.format(
+                            "You invited %s to the party.",
+                            targetPlayerRef.getUsername()
+                    )).color(Color.ORANGE)
+            );
+
+            targetPlayerRef.sendMessage(
+                    Message.raw(String.format(
+                            "%s has invited you to a party. Use /party accept or /party decline.",
+                            playerRef.getUsername()
+                    )).color(Color.ORANGE)
+            );
 
         } catch (IllegalArgumentException e) {
-            playerRef.sendMessage(
-                    Message.raw(e.getMessage())
-            );
+            playerRef.sendMessage(Message.raw(e.getMessage()).color(Color.RED));
         }
     }
 }

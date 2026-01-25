@@ -1,7 +1,7 @@
 package com.hydash.bedwarsplugin;
 
 import com.hydash.bedwarsplugin.party.PartyManager;
-import com.hydash.bedwarsplugin.party.commands.PartyCommand;
+import com.hydash.bedwarsplugin.party.commands.PartyCommandCollection;
 import com.hypixel.hytale.logger.HytaleLogger;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
@@ -18,6 +18,6 @@ public class ExamplePlugin extends JavaPlugin {
 
     @Override
     protected void setup() {
-        this.getCommandRegistry().registerCommand(new PartyCommand());
+        this.getCommandRegistry().registerCommand(new PartyCommandCollection());
     }
 }

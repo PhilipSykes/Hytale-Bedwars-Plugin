@@ -1,4 +1,4 @@
 package com.hydash.bedwarsplugin.party.commands;
 
-public class PartyRemoveCommand {
+public class PartyKickCommand {
 }
