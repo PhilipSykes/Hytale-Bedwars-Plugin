@@ -7,43 +7,14 @@
   "Categories": [
     "Furniture.Benches"
   ],
-  "Recipe": {
-    "TimeSeconds": 1,
-    "Input": [
-      {
-        "ItemId": "Ingredient_Fibre",
-        "Quantity": 3
-      },
-      {
-        "ItemId": "Ingredient_Hide_Light",
-        "Quantity": 2
-      }
-    ],
-    "BenchRequirement": [
-      {
-        "Id": "Fieldcraft",
-        "Type": "Crafting",
-        "Categories": [
-          "Tools"
-        ]
-      },
-      {
-        "Id": "Workbench",
-        "Type": "Crafting",
-        "Categories": [
-          "Workbench_Survival"
-        ]
-      }
-    ]
-  },
   "BlockType": {
     "Material": "Solid",
     "DrawType": "Model",
     "Opacity": "Transparent",
-    "CustomModel": "Items/Bedwars_Bed.blockymodel",
+    "CustomModel": "Items/Furniture/Bedwars_Bed.blockymodel",
     "CustomModelTexture": [
       {
-        "Texture": "Items/Bedwars_Bed.png",
+        "Texture": "Items/Furniture/Bedwars_Bed.png",
         "Weight": 1
       }
     ],
@@ -100,14 +71,6 @@
       -11
     ]
   },
-  "ResourceTypes": [
-    {
-      "Id": "Fuel"
-    },
-    {
-      "Id": "Charcoal"
-    }
-  ],
   "Tags": {
     "Type": [
       "Furniture"
