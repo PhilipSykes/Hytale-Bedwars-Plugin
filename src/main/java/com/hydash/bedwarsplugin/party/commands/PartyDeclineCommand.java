@@ -16,9 +16,10 @@ import org.jetbrains.annotations.NotNull;
 import java.awt.*;
 import java.util.UUID;
 
-public class PartyDisbandCommand extends AbstractPlayerCommand {
-    public PartyDisbandCommand() {
-        super("disband", "Disband your current party.");
+public class PartyDeclineCommand extends AbstractPlayerCommand {
+
+    public PartyDeclineCommand() {
+        super("decline", "Decline the most recent party invite.");
     }
 
     @Override
@@ -29,31 +30,21 @@ public class PartyDisbandCommand extends AbstractPlayerCommand {
             @NotNull PlayerRef playerRef,
             @NotNull World world
     ) {
-        UUID senderUuid = playerRef.getUuid();
+        UUID playerUuid = playerRef.getUuid();
 
         try {
             PartyManager partyManager = ExamplePlugin.PARTY_MANAGER;
+            Party party = partyManager.getInvitedParty(playerUuid);
 
-            Party party = partyManager.getParty(senderUuid);
+            partyManager.declineInvite(playerUuid);
 
-            if (party == null) {
-                throw new IllegalArgumentException(
-                        "No party found!"
-                );
-            } else {
-                if (party.isNotLeader(senderUuid)) {
-                    throw new IllegalArgumentException(
-                            "You are not the leader of this party!"
-                    );
-                } else {
-                    party.broadcast("The party has been disbanded!");
-                    partyManager.disbandParty(party);
-                }
-            }
-        } catch (IllegalArgumentException e) {
             playerRef.sendMessage(
-                    Message.raw(e.getMessage()).color(Color.RED)
+                    Message.raw("Party invite declined.").color(Color.RED)
             );
+            party.getLeader().sendMessage(Message.raw(String.format("%s has declined your party invite!", playerRef.getUsername())).color(Color.RED));
+
+        } catch (IllegalArgumentException e) {
+            playerRef.sendMessage(Message.raw(e.getMessage()).color(Color.RED));
         }
     }
 }

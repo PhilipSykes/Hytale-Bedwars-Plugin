@@ -9,16 +9,19 @@ import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.command.system.CommandContext;
 import com.hypixel.hytale.server.core.command.system.basecommands.AbstractPlayerCommand;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
+import com.hypixel.hytale.server.core.universe.Universe;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
-import java.util.UUID;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
-public class PartyDisbandCommand extends AbstractPlayerCommand {
-    public PartyDisbandCommand() {
-        super("disband", "Disband your current party.");
+public class PartyListCommand extends AbstractPlayerCommand {
+
+    public PartyListCommand() {
+        super("list", "Lists all the party members.");
     }
 
     @Override
@@ -29,27 +32,24 @@ public class PartyDisbandCommand extends AbstractPlayerCommand {
             @NotNull PlayerRef playerRef,
             @NotNull World world
     ) {
-        UUID senderUuid = playerRef.getUuid();
-
         try {
             PartyManager partyManager = ExamplePlugin.PARTY_MANAGER;
-
-            Party party = partyManager.getParty(senderUuid);
-
+            Party party = partyManager.getParty(playerRef.getUuid());
             if (party == null) {
-                throw new IllegalArgumentException(
-                        "No party found!"
-                );
-            } else {
-                if (party.isNotLeader(senderUuid)) {
-                    throw new IllegalArgumentException(
-                            "You are not the leader of this party!"
-                    );
-                } else {
-                    party.broadcast("The party has been disbanded!");
-                    partyManager.disbandParty(party);
-                }
+                throw new IllegalArgumentException("You are not in a party.");
             }
+
+            Universe universe = Universe.get();
+
+            String players = party.getPlayers().stream()
+                    .map(universe::getPlayer)
+                    .filter(Objects::nonNull)
+                    .map(PlayerRef::getUsername)
+                    .collect(Collectors.joining(", "));
+
+            String message = String.format("You are in a party with: %s.", players);
+            playerRef.sendMessage(Message.raw(message).color(Color.ORANGE));
+
         } catch (IllegalArgumentException e) {
             playerRef.sendMessage(
                     Message.raw(e.getMessage()).color(Color.RED)
