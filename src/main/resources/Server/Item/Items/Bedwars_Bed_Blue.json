@@ -48,12 +48,7 @@
       ]
     },
     "ParticleColor": "#001bff",
-    "BlockSoundSetId": "Cloth",
-    "BlockEntity": {
-      "Components": {
-        "RespawnBlock": {}
-      }
-    }
+    "BlockSoundSetId": "Cloth"
   },
   "PlayerAnimationsId": "Block",
   "IconProperties": {

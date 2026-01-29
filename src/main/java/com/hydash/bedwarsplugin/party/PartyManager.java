@@ -20,7 +20,7 @@ public class PartyManager {
     }
 
     public Party getParty(UUID player) {
-        return partyByPlayer.get(player);
+            return partyByPlayer.get(player);
     }
 
     public Party getInvitedParty(UUID player) {

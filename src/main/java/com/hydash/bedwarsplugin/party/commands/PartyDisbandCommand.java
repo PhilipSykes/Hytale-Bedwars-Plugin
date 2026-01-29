@@ -18,7 +18,7 @@ import java.util.UUID;
 
 public class PartyDisbandCommand extends AbstractPlayerCommand {
     public PartyDisbandCommand() {
-        super("disband", "Disband your current party");
+        super("disband", "Disband your current party.");
     }
 
     @Override

@@ -24,10 +24,7 @@
       "Breaking": {
         "GatherType": "BedwarsBreak",
         "Quantity": 0
-      },
-      "Tools": [
-        {}
-      ]
+      }
     },
     "Beds": [
       {
@@ -50,13 +47,8 @@
         }
       ]
     },
-    "ParticleColor": "#ffcc0f",
-    "BlockSoundSetId": "Cloth",
-    "BlockEntity": {
-      "Components": {
-        "RespawnBlock": {}
-      }
-    }
+    "ParticleColor": "#f3c80d",
+    "BlockSoundSetId": "Cloth"
   },
   "PlayerAnimationsId": "Block",
   "IconProperties": {

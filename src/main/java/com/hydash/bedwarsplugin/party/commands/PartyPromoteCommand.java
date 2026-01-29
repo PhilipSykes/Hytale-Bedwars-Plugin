@@ -22,7 +22,7 @@ public class PartyPromoteCommand extends AbstractPlayerCommand {
     private final RequiredArg<PlayerRef> targetPlayerRef;
 
     public PartyPromoteCommand() {
-        super("promote", "Promote a player to party leader!");
+        super("promote", "Promote a player to party leader.");
         this.targetPlayerRef = this.withRequiredArg("Player", "Player to add to party", ArgTypes.PLAYER_REF);
     }
 
